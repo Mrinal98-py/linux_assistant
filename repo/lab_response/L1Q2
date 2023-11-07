@@ -1,0 +1,65 @@
+L1Q2  -  Write a C program to assign values to each member of the following structure.
+Pass the populated structure to a function Using call-by-value and another function using call-by-address and print the value of each member of the structure.
+struct student_info{
+int roll_no;
+char name [50];
+float CGPA;
+struct dob age;
+};
+
+Explanation -  In this question, we are required to define a structure named student_info that contains the following members:
+
+    1. roll_no - an integer representing the roll number of the student.
+    2. name - a character array (string) to store the name of the student.
+    3. CGPA - a float to store the Cumulative Grade Point Average of the student.
+    4. age - a structure of type dob that represents the date of birth.
+We will populate the student_info structure with values and pass it to two different functions. One function will receive the structure using call-by-value, and the other function will receive it using call-by-address (pointer). Both functions will print the values of the structure members.
+
+Code - #include <stdio.h>
+
+// Define the structure for date of birth
+struct dob {
+    int day;
+    int month;
+    int year;
+};
+
+// Define the main structure for student information
+struct student_info {
+    int roll_no;
+    char name[50];
+    float CGPA;
+    struct dob age;
+};
+
+// Function to print student information received by value
+void printStudentInfoByValue(struct student_info student) {
+    printf("Printing student information using call-by-value:\n");
+    printf("Roll Number: %d\n", student.roll_no);
+    printf("Name: %s\n", student.name);
+    printf("CGPA: %.2f\n", student.CGPA);
+    printf("Date of Birth: %d-%d-%d\n", student.age.day, student.age.month, student.age.year);
+}
+
+// Function to print student information received by address
+void printStudentInfoByAddress(const struct student_info *student) {
+    printf("Printing student information using call-by-address:\n");
+    printf("Roll Number: %d\n", student->roll_no);
+    printf("Name: %s\n", student->name);
+    printf("CGPA: %.2f\n", student->CGPA);
+    printf("Date of Birth: %d-%d-%d\n", student->age.day, student->age.month, student->age.year);
+}
+
+int main() {
+    // Create a student_info structure and populate it with values
+    struct student_info student1 = {101, "John Doe", 3.75, {15, 8, 2000}};
+
+    // Call the functions to print the student information
+    printStudentInfoByValue(student1);
+    printStudentInfoByAddress(&student1);
+
+    return 0;
+}
+
+References -  https://www.studocu.com/
+                        https://www.programiz.com/c-programming/c-structure-function

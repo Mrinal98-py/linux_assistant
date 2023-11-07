@@ -1,0 +1,59 @@
+L1Q4 -  Write a C Program to enter a number and store the number across the following structure and print the content of each member of the structure. Then aggregate each member of the structure to form the original number and print the same.
+struct pkt{
+char ch1;
+char ch2[2];
+char ch3;
+};
+
+
+Explanation - In this C program, we are given a structure named pkt, which contains three members:
+
+ch1 - a single character.
+ch2 - an array of two characters.
+ch3 - a single character.
+We are required to enter a number and store it across the members of this structure. After that, we need to print the content of each member. Finally, we'll aggregate the members of the structure to form the original number and print it.
+To achieve this, we'll need to perform type casting and use bitwise operations to combine the characters into an integer.
+
+Code - #include <stdio.h>
+
+// Define the structure
+struct pkt {
+    char ch1;
+    char ch2[2];
+    char ch3;
+};
+
+int main() {
+    int num;
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    // Create a structure of type pkt and store the number across its members
+    struct pkt packet;
+    packet.ch1 = (char)(num & 0xFF); // Store the least significant byte
+    packet.ch2[0] = (char)((num >> 8) & 0xFF);
+    packet.ch2[1] = (char)((num >> 16) & 0xFF);
+    packet.ch3 = (char)((num >> 24) & 0xFF); // Store the most significant byte
+
+    // Print the content of each member of the structure
+    printf("Content of structure members:\n");
+    printf("ch1: %d\n", packet.ch1);
+    printf("ch2[0]: %d\n", packet.ch2[0]);
+    printf("ch2[1]: %d\n", packet.ch2[1]);
+    printf("ch3: %d\n", packet.ch3);
+
+    // Aggregate the members to form the original number
+    int originalNum =
+        (packet.ch1 & 0xFF) |
+        ((packet.ch2[0] & 0xFF) << 8) |
+        ((packet.ch2[1] & 0xFF) << 16) |
+        ((packet.ch3 & 0xFF) << 24);
+
+    // Print the original number
+    printf("Original Number: %d\n", originalNum);
+
+    return 0;
+}
+
+
+References - https://www.geeksforgeeks.org/

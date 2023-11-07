@@ -1,0 +1,55 @@
+L1Q5 -  Write a C program to check whether the Host machine is in Little Endian or Big Endian. Enter a number, print the content of each byte location and Convert the Endianness of the same i.e. Little to Big Endian and vice-versa.   
+ 
+
+Explanation - In this C program, we want to determine whether the host machine is little-endian or big-endian. Endianness refers to the byte order in which multibyte data types, such as integers, are stored in memory. Little-endian machines store the least significant byte first, while big-endian machines store the most significant byte first.
+To check the endianness, we can use a union containing an integer and a character array. By storing a known value in the integer and examining the bytes in the character array, we can determine the byte order.
+Additionally, we will enter a number, print the content of each byte location, and then convert the endianness of that number.
+
+Code -  #include <stdio.h>
+
+// Function to check the endianness of the host machine
+int isLittleEndian() {
+    union {
+        int num;
+        char bytes[sizeof(int)];
+    } test;
+    
+    test.num = 1; // Store a known value
+    
+    // If the least significant byte is 1, it's a little-endian machine
+    return test.bytes[0] == 1;
+}
+
+// Function to convert endianness
+unsigned int swapEndianness(unsigned int num) {
+    return ((num >> 24) & 0xFF) | ((num >> 8) & 0xFF00) | ((num << 8) & 0xFF0000) | ((num << 24) & 0xFF000000);
+}
+
+int main() {
+    int num;
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    // Check and print the endianness of the host machine
+    if (isLittleEndian()) {
+        printf("Host machine is Little Endian.\n");
+    } else {
+        printf("Host machine is Big Endian.\n");
+    }
+
+    // Print the content of each byte location
+    printf("Bytes in the entered number:\n");
+    unsigned char *bytes = (unsigned char *)&num;
+    for (int i = 0; i < sizeof(int); i++) {
+        printf("Byte %d: 0x%02X\n", i, bytes[i]);
+    }
+
+    // Convert endianness and print the result
+    unsigned int swappedNum = swapEndianness(num);
+    printf("Number with endianness converted: %d\n", swappedNum);
+
+    return 0;
+}
+
+References -  https://en.wikipedia.org/wiki/Endianness
+                         https://cs-fundamentals.com/tech-interview/c/c-program-to-check-little-and-big-endian-architecture

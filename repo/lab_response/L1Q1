@@ -1,0 +1,41 @@
+L1Q1 - Write a C program to swap the content of 2 variables entered through the command line using function and pointer.
+
+Explanation - Create a C program that swaps the content of two variables entered through the command line using a function and pointers.
+We ask the user to enter values for variable a and b. We pass the address of variable a and b to function swap(). Inside function swap() we take a local variable temp. Since address of variable a and b are passed to swap() method, we take 2 pointer variables *x and *y. Pointer variable x holds the address of a and pointer variable y holds the address of b. Using below logic we swap the values present at address a( or x ) and b( or y ). 
+temp = *x;
+*x = *y;
+*y = temp;
+ Since we are directly changing the value present at particular address, the value gets reflected throughout the program and not just inside particular function. That’s why we are able to print the result inside main function and the values of variable a and b are swapped, without getting any returned value from function swap().
+
+Code -  #include <stdio.h>
+#include <stdlib.h>
+
+// Function to swap two integers using pointers
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 3) {
+        printf("Usage: %s <value1> <value2>\n", argv[0]);
+        return 1;
+    }
+
+    int num1 = atoi(argv[1]); // Convert the first command-line argument to an integer
+    int num2 = atoi(argv[2]); // Convert the second command-line argument to an integer
+
+    printf("Before swapping: num1 = %d, num2 = %d\n", num1, num2);
+
+    // Call the swap function to swap the values of num1 and num2
+    swap(&num1, &num2);
+
+    printf("After swapping: num1 = %d, num2 = %d\n", num1, num2);
+
+    return 0;
+}
+
+References -  https://technotip.com/7908/c-program-to-swap-two-numbers-using-pointers/
+https://programmersportal.com/c-program-to-swap-two-numbers-using-pointers/
+https://www.geeksforgeeks.org/c-program-swap-two-numbers/

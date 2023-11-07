@@ -1,0 +1,28 @@
+L1Q3  Write a C program to extract each byte from a given number and store them in separate character variables and print the content of those variables.
+  
+Explanation - In this C program, we are given an integer, and we want to extract each byte from the integer and store them in separate character variables. We will use bitwise operations to achieve this. We'll extract the bytes one by one by shifting the integer right by 0, 8, 16, and 24 bits and then masking the least significant byte using 0xFF (hexadecimal).
+
+Code - #include <stdio.h>
+
+int main() {
+    unsigned int num; // The input number
+    printf("Enter an integer: ");
+    scanf("%u", &num);
+
+    // Extract each byte using bitwise operations
+    unsigned char byte1 = (num >> 0) & 0xFF;
+    unsigned char byte2 = (num >> 8) & 0xFF;
+    unsigned char byte3 = (num >> 16) & 0xFF;
+    unsigned char byte4 = (num >> 24) & 0xFF;
+
+    // Print the content of each byte
+    printf("Byte 1: %d\n", byte1);
+    printf("Byte 2: %d\n", byte2);
+    printf("Byte 3: %d\n", byte3);
+    printf("Byte 4: %d\n", byte4);
+
+    return 0;
+}
+ 
+References - https://www.includehelp.com/c-programs/extract-bytes-from-int.aspx
+https://www.electro-tech-online.com/threads/c-program-to-extract-each-byte-into-a-character-variable.150855/
